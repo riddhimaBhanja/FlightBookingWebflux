@@ -1,5 +1,3 @@
-Here is the clean, copy-paste ready **README.md** version with the **Swagger section removed**, as requested:
-
 ---
 
 # **Flight Booking WebFlux**
@@ -197,4 +195,4 @@ Includes:
 
 ---
 
-If you want this formatted with badges, emojis, or a more professional README layout, just tell me.
+
