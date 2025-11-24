@@ -62,7 +62,7 @@ class FlightControllerTest {
         when(flightService.addInventory(any(InventoryRequest.class))).thenReturn(Mono.just(saved));
 
         webClient.post()
-                .uri("/api/v1.0/flight/airline/inventory")
+                .uri("/api/v1/flight/airline/inventory")
                 .bodyValue(req)
                 .exchange()
                 .expectStatus().is2xxSuccessful()
@@ -86,7 +86,7 @@ class FlightControllerTest {
         when(flightService.searchFlights(any(FlightSearchRequest.class))).thenReturn(Flux.just(f1, f2));
 
         webClient.post()
-                .uri("/api/v1.0/flight/search")
+                .uri("/api/v1/flight/search")
                 .bodyValue(req)
                 .exchange()
                 .expectStatus().is2xxSuccessful()
@@ -117,7 +117,7 @@ class FlightControllerTest {
         when(flightService.bookTicket(eq(flightId), any(BookRequest.class))).thenReturn(Mono.just(resp));
 
         webClient.post()
-                .uri("/api/v1.0/flight/booking/{flightId}", flightId)
+                .uri("/api/v1/flight/booking/{flightId}", flightId)
                 .bodyValue(req)
                 .exchange()
                 .expectStatus().is2xxSuccessful()
@@ -138,7 +138,7 @@ class FlightControllerTest {
         when(flightService.getTicketByPnr(pnr)).thenReturn(Mono.just(resp));
 
         webClient.get()
-                .uri("/api/v1.0/flight/ticket/{pnr}", pnr)
+                .uri("/api/v1/flight/ticket/{pnr}", pnr)
                 .exchange()
                 .expectStatus().is2xxSuccessful()
                 .expectBody()
@@ -155,7 +155,7 @@ class FlightControllerTest {
         when(flightService.getBookingHistory(email)).thenReturn(Flux.just(b1, b2));
 
         webClient.get()
-                .uri("/api/v1.0/flight/booking/history/{emailId}", email)
+                .uri("/api/v1/flight/booking/history/{emailId}", email)
                 .exchange()
                 .expectStatus().is2xxSuccessful()
                 .expectBody()
@@ -174,7 +174,7 @@ class FlightControllerTest {
         when(flightService.cancelTicket(pnr)).thenReturn(Mono.just(resp));
 
         webClient.delete()
-                .uri("/api/v1.0/flight/cancel/{pnr}", pnr)
+                .uri("/api/v1/flight/cancel/{pnr}", pnr)
                 .exchange()
                 .expectStatus().is2xxSuccessful()
                 .expectBody()

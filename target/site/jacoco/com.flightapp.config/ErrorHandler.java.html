@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ErrorHandler.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">flightAppWebflux</a> &gt; <a href="index.source.html" class="el_package">com.flightapp.config</a> &gt; <span class="el_source">ErrorHandler.java</span></div><h1>ErrorHandler.java</h1><pre class="source lang-java linenums">package com.flightapp.config;
+
+import com.flightapp.exception.FlightNotFoundException;
+import com.flightapp.exception.PNRNotFoundException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+
+import java.time.LocalDateTime;
+import java.util.Map;
+
+<span class="nc" id="L12">public class ErrorHandler {</span>
+    @ExceptionHandler(FlightNotFoundException.class)
+    public ResponseEntity&lt;Map&lt;String, Object&gt;&gt; handleFlightNotFound(FlightNotFoundException ex) {
+<span class="nc" id="L15">        return ResponseEntity.status(HttpStatus.NOT_FOUND)</span>
+<span class="nc" id="L16">                .body(errorBody(HttpStatus.NOT_FOUND, ex.getMessage()));</span>
+    }
+
+    @ExceptionHandler(PNRNotFoundException.class)
+    public ResponseEntity&lt;Map&lt;String, Object&gt;&gt; handlePnrNotFound(PNRNotFoundException ex) {
+<span class="nc" id="L21">        return ResponseEntity.status(HttpStatus.NOT_FOUND)</span>
+<span class="nc" id="L22">                .body(errorBody(HttpStatus.NOT_FOUND, ex.getMessage()));</span>
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity&lt;Map&lt;String, Object&gt;&gt; handleOtherErrors(Exception ex) {
+<span class="nc" id="L27">        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)</span>
+<span class="nc" id="L28">                .body(errorBody(HttpStatus.INTERNAL_SERVER_ERROR, &quot;Something went wrong&quot;));</span>
+    }
+
+    private Map&lt;String, Object&gt; errorBody(HttpStatus status, String message) {
+<span class="nc" id="L32">        return Map.of(</span>
+<span class="nc" id="L33">                &quot;timestamp&quot;, LocalDateTime.now().toString(),</span>
+<span class="nc" id="L34">                &quot;status&quot;, status.value(),</span>
+<span class="nc" id="L35">                &quot;error&quot;, status.getReasonPhrase(),</span>
+                &quot;message&quot;, message
+        );
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
