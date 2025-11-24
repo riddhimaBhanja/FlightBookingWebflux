@@ -1,0 +1,17 @@
+package com.flightapp.dto;
+
+import lombok.Data;
+import java.time.LocalDate;
+import java.util.List;
+
+import constants.MealType;
+
+@Data
+public class BookRequest {
+    private String passengerName;
+    private String userEmail;
+    private LocalDate journeyDate;
+    private Integer noOfSeats;
+    private MealType mealType;
+    private List<PassengerRequest> passengers;
+}
